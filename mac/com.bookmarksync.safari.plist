@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent for the Safari bridge.
+
+  Install:
+    cp mac/com.bookmarksync.safari.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.bookmarksync.safari.plist
+
+  Edit ProgramArguments below to your real node path (`which node`) and the
+  real checkout path first — launchd does not expand ~ or read your shell PATH.
+
+  RunAtLoad plus a 30-minute interval. The script no-ops harmlessly when
+  Safari is open and nothing needs writing, so a frequent tick is cheap; the
+  write only lands once Safari is closed.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.bookmarksync.safari</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/node</string>
+        <string>/Users/CHANGEME/bookmark-sync/mac/safari-sync.mjs</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/bookmark-sync.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/bookmark-sync.err</string>
+</dict>
+</plist>

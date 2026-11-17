@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bookmark Sync</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font: 14px/1.5 system-ui, -apple-system, Segoe UI, sans-serif;
+      margin: 0; padding: 20px; min-width: 380px; max-width: 560px;
+    }
+    h1 { font-size: 17px; margin: 0 0 4px; }
+    p.sub { margin: 0 0 20px; opacity: .7; }
+    label { display: block; margin: 14px 0 4px; font-weight: 600; }
+    input {
+      width: 100%; padding: 7px 9px; box-sizing: border-box;
+      border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+      border-radius: 6px; background: transparent; color: inherit; font: inherit;
+    }
+    .row { display: flex; gap: 10px; }
+    .row > * { flex: 1; }
+    .actions { display: flex; gap: 8px; margin-top: 20px; align-items: center; }
+    button {
+      padding: 8px 14px; border-radius: 6px; font: inherit; cursor: pointer;
+      border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+      background: color-mix(in srgb, currentColor 8%, transparent); color: inherit;
+    }
+    button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+    #status { margin-top: 16px; padding: 10px 12px; border-radius: 6px; font-size: 13px;
+      background: color-mix(in srgb, currentColor 7%, transparent); white-space: pre-wrap; }
+    .hint { font-size: 12px; opacity: .65; margin-top: 4px; }
+    code { font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Bookmark Sync</h1>
+  <p class="sub">Syncs this browser with a private GitHub repo.</p>
+
+  <label for="token">GitHub token</label>
+  <input id="token" type="password" autocomplete="off" placeholder="github_pat_...">
+  <div class="hint">
+    Fine-grained token, scoped to just the one repo, with
+    <b>Contents: Read and write</b>. Nothing else is needed.
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="owner">Owner</label>
+      <input id="owner" placeholder="your-username">
+    </div>
+    <div>
+      <label for="repo">Repo</label>
+      <input id="repo" placeholder="bookmarks">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="branch">Branch</label>
+      <input id="branch" placeholder="main">
+    </div>
+    <div>
+      <label for="path">File path</label>
+      <input id="path" placeholder="bookmarks.json">
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="save">Save</button>
+    <button id="test">Test connection</button>
+    <button id="sync" class="primary">Sync now</button>
+  </div>
+
+  <div id="status">Not configured yet.</div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
