@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 22
 
-      - run: node --test test/model.test.mjs
+      - run: npm test
       - run: ./build.ps1
 
       - name: Package
