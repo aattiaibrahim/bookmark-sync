@@ -45,7 +45,7 @@ and you can revoke it without touching anything else in your account.
 ### 2. The browsers
 
 ```bash
-node --test test/model.test.mjs
+npm test
 ```
 
 ```powershell
