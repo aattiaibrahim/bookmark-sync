@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bookmark Sync</title>
+  <meta name="description" content="Two-way bookmark sync across Chrome, Edge, Firefox and Safari through your own private GitHub repo.">
+  <link rel="icon" href="icon-128.png">
+  <style>
+    :root {
+      --bg: #f7f8fa; --card: #fff; --text: #14171c; --muted: #5b6472;
+      --line: #e3e6eb; --accent: #2563eb; --accent-text: #fff; --code: #eef1f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115; --card: #171a20; --text: #e8eaee; --muted: #9aa3b2;
+        --line: #262a33; --accent: #3b82f6; --accent-text: #fff; --code: #1f232b;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 56px 16px 80px; }
+    header { display: flex; align-items: center; gap: 14px; }
+    header img { width: 48px; height: 48px; }
+    h1 { font-size: 32px; margin: 0; letter-spacing: -.01em; }
+    .lede { font-size: 19px; color: var(--muted); max-width: 640px; margin: 16px 0 40px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 22px; display: flex; flex-direction: column;
+    }
+    .card h2 { font-size: 18px; margin: 0 0 2px; }
+    .card .os { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+    .card ol { padding-left: 20px; margin: 0 0 18px; color: var(--muted); font-size: 14px; }
+    .card ol li { margin-bottom: 4px; }
+    .card .btn { margin-top: auto; }
+    .btn {
+      display: inline-block; text-align: center; padding: 10px 16px; border-radius: 8px;
+      background: var(--accent); color: var(--accent-text); text-decoration: none; font-weight: 600;
+    }
+    code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .9em; }
+    .note {
+      margin-top: 40px; padding: 18px 20px; border-left: 3px solid var(--accent);
+      background: var(--card); border-radius: 0 8px 8px 0; color: var(--muted); font-size: 15px;
+    }
+    .note strong { color: var(--text); }
+    h3 { margin: 48px 0 8px; font-size: 20px; }
+    p { max-width: 720px; }
+    footer { margin-top: 56px; font-size: 14px; color: var(--muted); }
+    footer a, p a, li a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon-128.png" alt="">
+    <h1>Bookmark Sync</h1>
+  </header>
+  <p class="lede">
+    Two-way bookmark sync across Chrome, Edge, Brave, Firefox and Safari —
+    stored in your own private GitHub repo. No account, no server, no iCloud for Windows.
+  </p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Chrome · Edge · Brave</h2>
+      <p class="os">Windows and macOS</p>
+      <ol>
+        <li>Download and unzip.</li>
+        <li>Open <code>chrome://extensions</code> and turn on Developer mode.</li>
+        <li>Load unpacked → pick the unzipped folder.</li>
+      </ol>
+      <a class="btn" href="https://github.com/aattiaibrahim/bookmark-sync/releases/latest/download/bookmark-sync-chromium.zip">Download extension</a>
+    </section>
+
+    <section class="card">
+      <h2>Safari</h2>
+      <p class="os">macOS · also reaches iPhone and iPad via iCloud</p>
+      <ol>
+        <li>Install <a href="https://nodejs.org">Node.js</a>.</li>
+        <li>Download and unzip, then in Terminal run <code>bash mac/install.sh</code> from the unzipped folder.</li>
+        <li>Follow the three steps it prints.</li>
+      </ol>
+      <a class="btn" href="https://github.com/aattiaibrahim/bookmark-sync/releases/latest/download/bookmark-sync-mac.zip">Download for Mac</a>
+    </section>
+
+    <section class="card">
+      <h2>Firefox</h2>
+      <p class="os">Windows and macOS</p>
+      <ol>
+        <li>Download and unzip.</li>
+        <li>Open <code>about:debugging#/runtime/this-firefox</code>.</li>
+        <li>Load Temporary Add-on → pick <code>manifest.json</code>.</li>
+      </ol>
+      <a class="btn" href="https://github.com/aattiaibrahim/bookmark-sync/releases/latest/download/bookmark-sync-firefox.zip">Download add-on</a>
+    </section>
+  </div>
+
+  <div class="note">
+    <strong>Why Safari is a Mac helper, not an extension.</strong>
+    Safari is the only major browser with no bookmarks extension API, so no
+    Safari extension can read or write a bookmark. The helper edits Safari's
+    bookmark file directly instead — and iCloud carries those changes to
+    your iPhone and iPad for free.
+  </div>
+
+  <h3>Before you start</h3>
+  <p>
+    Create an empty <strong>private</strong> GitHub repo for your bookmarks, then a
+    <a href="https://github.com/settings/personal-access-tokens/new">fine-grained token</a>
+    with access to only that repo and <em>Contents: Read and write</em>.
+    Paste it into each browser's extension options. Export a bookmarks backup from
+    every browser before the first sync.
+  </p>
+
+  <footer>
+    <a href="https://github.com/aattiaibrahim/bookmark-sync">Source on GitHub</a> ·
+    <a href="privacy.html">Privacy</a>
+  </footer>
+</main>
+</body>
+</html>

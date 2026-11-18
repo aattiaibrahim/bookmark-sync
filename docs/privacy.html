@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bookmark Sync Privacy</title>
+  <style>
+    :root { --bg: #f7f8fa; --text: #14171c; --muted: #5b6472; --accent: #2563eb; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f1115; --text: #e8eaee; --muted: #9aa3b2; --accent: #3b82f6; }
+    }
+    body { margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 56px 16px 80px; }
+    h1 { font-size: 28px; margin: 0 0 24px; }
+    a { color: var(--accent); }
+    p.muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Privacy policy</h1>
+  <p>Bookmark Sync has no server and collects nothing. The developer never receives your data.</p>
+  <p><strong>What it reads:</strong> your browser bookmarks (titles, URLs and folders), and a
+    GitHub token, owner and repo name that you enter yourself.</p>
+  <p><strong>Where it goes:</strong> bookmarks are sent only to <code>api.github.com</code>, into
+    the repository you configured, using your token. Nothing is sent anywhere else.</p>
+  <p><strong>What is stored locally:</strong> the token, repo settings and a snapshot of the last
+    synced state, in the browser's extension storage (or <code>~/.bookmark-sync</code> on a Mac).
+    The token is not encrypted there; scope it to the one bookmarks repo.</p>
+  <p><strong>No analytics, ads or tracking.</strong> Bookmark data is never sold, shared or
+    used for anything but syncing.</p>
+  <p class="muted"><a href="index.html">← Bookmark Sync</a></p>
+</main>
+</body>
+</html>
