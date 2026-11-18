@@ -13,6 +13,7 @@ foreach ($target in @('chromium', 'firefox')) {
 
     Copy-Item (Join-Path $root 'src')     -Destination $out -Recurse
     Copy-Item (Join-Path $root 'options') -Destination $out -Recurse
+    Copy-Item (Join-Path $root 'icons')   -Destination $out -Recurse
     Copy-Item (Join-Path $root "manifests\manifest.$target.json") `
               -Destination (Join-Path $out 'manifest.json')
 

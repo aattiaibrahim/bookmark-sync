@@ -1,0 +1,41 @@
+# Push a tag like v0.1.0 and this publishes a GitHub Release with the three
+# downloads the website links to (releases/latest/download/<name>.zip).
+
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: node --test test/model.test.mjs
+      - run: ./build.ps1
+
+      - name: Package
+        run: |
+          Compress-Archive -Path dist/chromium/* -DestinationPath bookmark-sync-chromium.zip
+          Compress-Archive -Path dist/firefox/*  -DestinationPath bookmark-sync-firefox.zip
+          New-Item -ItemType Directory bookmark-sync-mac | Out-Null
+          Copy-Item mac, src -Destination bookmark-sync-mac -Recurse
+          Compress-Archive -Path bookmark-sync-mac -DestinationPath bookmark-sync-mac.zip
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create $env:GITHUB_REF_NAME --generate-notes
+          bookmark-sync-chromium.zip bookmark-sync-firefox.zip bookmark-sync-mac.zip

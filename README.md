@@ -80,6 +80,29 @@ Once the dry run looks right, quit Safari and run it for real. To automate,
 edit the paths in `mac/com.bookmarksync.safari.plist` and load it with
 `launchctl`.
 
+## Website and releases
+
+`docs/` is the public download page (GitHub Pages: Settings → Pages → Deploy
+from branch → `main` / `docs`). Its buttons link to
+`releases/latest/download/*.zip`, which `.github/workflows/release.yml`
+produces when you push a version tag:
+
+```bash
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+Keep the tag equal to `version` in both manifests. The release contains:
+
+| File | For |
+|---|---|
+| `bookmark-sync-chromium.zip` | Chrome / Edge / Brave, and the Chrome Web Store upload |
+| `bookmark-sync-firefox.zip` | Firefox, and the addons.mozilla.org upload |
+| `bookmark-sync-mac.zip` | Safari bridge — unzip, run `bash mac/install.sh` |
+
+Chrome Web Store submission is manual: upload the chromium zip in the
+[developer dashboard](https://chrome.google.com/webstore/devconsole), using
+`docs/privacy.html` (on your Pages URL) as the privacy policy.
+
 ## How the merge works
 
 Naive sync tools either last-writer-wins the whole tree (which silently eats
@@ -137,4 +160,6 @@ wrong, `git log` shows you exactly what changed and `git revert` puts it back.
 | `src/browser-adapter.js` | Live tree ↔ canonical model, ID mapping, root mapping. |
 | `src/background.js` | Orchestration, debounce, echo guard, retry. |
 | `mac/safari-sync.mjs` | Safari bridge. Reuses `model.js` — one copy of the rules. |
+| `mac/install.sh` | Installs the Safari bridge and its launchd agent. |
+| `docs/` | Public download page and privacy policy. |
 | `test/model.test.mjs` | Merge engine tests. |
